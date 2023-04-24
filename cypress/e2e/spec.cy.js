@@ -2,7 +2,8 @@ describe('Burrito Ordering System', () => {
   beforeEach('', () => {
     cy.intercept('GET', 'http://localhost:3001/api/v1/orders', 
       {'orders': [
-        { 'name': 'Example GET Order 1',
+        { 'id': 1,
+          'name': 'Example GET Order 1',
           'ingredients': ['GET ingredient 1', 'GET ingredient 2', 'GET ingredient 3']
         }
       ]}
@@ -10,12 +11,16 @@ describe('Burrito Ordering System', () => {
 
     cy.intercept('POST', 'http://localhost:3001/api/v1/orders', {
       statusCode: 200,
-      body: { 'name': 'Example POST Order',
-      'ingredients': ['POST ingredient 1', 'POST ingredient 2', 'POST ingredient 3']
-    }
+      body: { 
+        'id': 2,
+        'name': 'Example POST Order',
+        'ingredients': ['POST ingredient 1', 'POST ingredient 2', 'POST ingredient 3']
+      }
     });
 
-
+    cy.intercept('DELETE', 'http://localhost:3001/api/v1/orders/1', {
+      response: { ok: true }
+    });
 
     cy.visit('http://localhost:3000/');
   });
@@ -72,4 +77,11 @@ describe('Burrito Ordering System', () => {
       .get('span').should('exist').contains('Please fill out both your name and at least one ingredient!')
       .get('.order').should('have.length', '1');
   });
+
+  it('should allow user to delete an order', () => {
+    cy.get('.order').should('have.length', '1')
+      .get('.delete').click()
+      .get('.order').should('not.exist')
+      .get('section > p').contains('No orders yet!');
+  })
 })

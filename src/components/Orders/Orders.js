@@ -21,7 +21,7 @@ const Orders = ({setOrders, orders, setError}) => {
             return <li key={ingredient}>{ingredient}</li>
           })}
         </ul>
-        <button onClick={(e) => deleteOrder(e)}>Delete Order</button>
+        <button onClick={(e) => deleteOrder(e)} className='delete'>Delete Order</button>
       </div>
     )
   });
