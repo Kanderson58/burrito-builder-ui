@@ -54,7 +54,7 @@ const OrderForm = ({setOrders, orders}) => {
 
       <p>Order: { ingredients.join(', ') || 'Nothing selected' }</p>
 
-      <button onClick={e => handleSubmit(e)}>
+      <button id='submit' onClick={e => handleSubmit(e)}>
         Submit Order
       </button>
     </form>
