@@ -3,3 +3,13 @@ export const getOrders = async() => {
   const response = await fetchOrders
   return response.json();
 }
+
+export const postOrders = (order) => {
+  return fetch('http://localhost:3001/api/v1/orders', {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(order)
+  })
+}

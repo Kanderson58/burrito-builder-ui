@@ -1,10 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import {getOrders} from '../../apiCalls';
 import Orders from '../../components/Orders/Orders';
 import OrderForm from '../../components/OrderForm/OrderForm';
 
-const App = (props) => {
+const App = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -15,9 +15,10 @@ const App = (props) => {
 
   return (
     <main className="App">
+      {console.log(orders)}
       <header>
         <h1>Burrito Builder</h1>
-        <OrderForm />
+        <OrderForm setOrders={setOrders} orders={orders}/>
       </header>
       <Orders orders={orders}/>
     </main>

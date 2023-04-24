@@ -1,13 +1,18 @@
 import React, { Component, useState } from 'react';
 
-const OrderForm = () => {
+const OrderForm = ({setOrders, orders}) => {
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState([]);
-
 
   const handleSubmit = e => {
     e.preventDefault();
     clearInputs();
+    if(!name || !ingredients.length) {
+      alert('Please fill out your name and at least one ingredient!')
+    } else {
+      console.log('all gucci')
+      setOrders([...orders, {'name': name, 'ingredients': ingredients}])
+    }
   }
 
   const clearInputs = () => {
@@ -35,8 +40,6 @@ const OrderForm = () => {
 
   return (
     <form>
-      {console.log(name)}
-      {console.log(ingredients)}
       <input
         type='text'
         placeholder='Name'
