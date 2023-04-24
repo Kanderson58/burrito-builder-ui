@@ -4,13 +4,14 @@ import { postOrders } from '../../apiCalls';
 const OrderForm = ({setOrders, orders}) => {
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState([]);
+  const [error, setError] = useState('')
 
   const handleSubmit = e => {
     const newOrder = {'name': name, 'ingredients': ingredients}
     e.preventDefault();
     clearInputs();
     if(!name || !ingredients.length) {
-      alert('Please fill out your name and at least one ingredient!')
+      setError('Please fill out both your name and at least one ingredient!')
     } else {
       postOrders(newOrder)
       setOrders([...orders, newOrder])
@@ -23,11 +24,13 @@ const OrderForm = ({setOrders, orders}) => {
   }
 
   const handleIngredientChange = (e) => {
+    setError('');
     e.preventDefault();
     setIngredients([...ingredients, e.target.name]);
   }
 
   const handleNameChange = (e) => {
+    setError('');
     setName(e.target.value);
   }
 
@@ -51,6 +54,7 @@ const OrderForm = ({setOrders, orders}) => {
       />
 
       { ingredientButtons }
+      { error && <span>{error}</span>}
 
       <p>Order: { ingredients.join(', ') || 'Nothing selected' }</p>
 

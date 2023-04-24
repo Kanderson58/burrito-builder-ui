@@ -16,13 +16,14 @@ describe('Burrito Ordering System', () => {
   });
 
 
-  it.skip('should show users existing orders and an order form', () => {
-    // User flow #1:  The user navigates to the page and can read existing orders as well as view an order form.  The order form should start empty and no ingredients should be listed in the "Order" p tag.
+  it('should show users existing orders and an order form', () => {
+    // User flow #1:  The user navigates to the page and can read existing orders as well as view an order form.  The order form should start empty, no ingredients should be listed in the "Order", and no error should be displayed.
     cy.get('h1').contains('Burrito Builder')
       .get('form').should('exist')
       .get('input').should('exist').should('have.value', '')
       .get('button').should('have.length', '13')
       .get('p').contains('Nothing selected')
+      .get('span').should('not.exist');
 
     cy.get('.order').should('have.length', '1')
       .get('.order > :nth-child(1)').contains('Example GET Order 1')
@@ -47,7 +48,23 @@ describe('Burrito Ordering System', () => {
       .get('p').contains('Nothing selected');
   });
 
-  it.skip('should not allow a user to submit an order if the name field is not filled out or no ingredients are selected', () => {
+  it('should not allow a user to submit an order if the name field is not filled out or no ingredients are selected', () => {
     // User flow #3:  The user tries to submit order without filling out a name, or without selecting an ingredient, or both.  The user is notified of the error and asked to fill out all fields.  The order does not submit and will not appear on the page.
+    cy.get('.order').should('have.length', '1')
+      .get('#submit').click()
+      .get('span').should('exist').contains('Please fill out both your name and at least one ingredient!')
+      .get('.order').should('have.length', '1');
+
+    cy.get('.order').should('have.length', '1')
+      .get('input').type('Example Order')
+      .get('#submit').click()
+      .get('span').should('exist').contains('Please fill out both your name and at least one ingredient!')
+      .get('.order').should('have.length', '1');
+
+    cy.get('.order').should('have.length', '1')
+      .get('[name="beans"]').click()
+      .get('#submit').click()
+      .get('span').should('exist').contains('Please fill out both your name and at least one ingredient!')
+      .get('.order').should('have.length', '1');
   });
 })
