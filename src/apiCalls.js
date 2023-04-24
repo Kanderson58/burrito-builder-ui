@@ -11,9 +11,9 @@ export const getOrders = () => {
 
 export const postOrders = (order) => {
   return fetch('http://localhost:3001/api/v1/orders', {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-type": "application/json"
+      'Content-type': 'application/json'
     },
     body: JSON.stringify(order)
   }).then(response => {
@@ -27,9 +27,9 @@ export const postOrders = (order) => {
 
 export const deleteFetch = (orderID) => {
   return fetch(`http://localhost:3001/api/v1/orders/${orderID}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-type": "application/json"
+      'Content-type': 'application/json'
     }
   }).then(response => {
     if(!response.ok) {

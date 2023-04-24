@@ -16,7 +16,7 @@ const App = () => {
   }, []);
 
   return (
-    <main className="App">
+    <main className='App'>
       <header>
         <h1>Burrito Builder</h1>
         <OrderForm setOrders={setOrders} orders={orders} setError={setError}/>
