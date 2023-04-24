@@ -19,7 +19,7 @@ describe('Burrito Ordering System', () => {
     });
 
     cy.intercept('DELETE', 'http://localhost:3001/api/v1/orders/1', {
-      response: { ok: true }
+      statusCode: 200
     });
 
     cy.visit('http://localhost:3000/');
