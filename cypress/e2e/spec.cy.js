@@ -9,8 +9,13 @@ describe('Burrito Ordering System', () => {
     );
 
     cy.intercept('POST', 'http://localhost:3001/api/v1/orders', {
-      statusCode: 200
+      statusCode: 200,
+      body: { 'name': 'Example POST Order',
+      'ingredients': ['POST ingredient 1', 'POST ingredient 2', 'POST ingredient 3']
+    }
     });
+
+
 
     cy.visit('http://localhost:3000/');
   });
@@ -35,14 +40,14 @@ describe('Burrito Ordering System', () => {
   it('should allow a user to submit an order that has  and show their order on submission', () => {
     // User flow #2:  The user can enter their information and submit an order, which is then displayed in the list of orders.  The order form should clear after submission.
     cy.get('.order').should('have.length', '1')
-      .get('input').type('Example Order')
-      .should('have.value', 'Example Order')
+      .get('input').type('Example POST Order')
+      .should('have.value', 'Example POST Order')
       .get('[name="beans"]').click()
       .get('p').contains('beans')
       .get('#submit').click()
       .get('.order').should('have.length', '2')
-      .get(':nth-child(2) > h3').contains('Example Order')
-      .get(':nth-child(2) > .ingredient-list > li').contains('beans');
+      .get(':nth-child(2) > h3').contains('Example POST Order')
+      .get(':nth-child(2) > .ingredient-list > li').contains('POST ingredient 1');
 
     cy.get('input').should('have.value', '')
       .get('p').contains('Nothing selected');

@@ -17,11 +17,10 @@ const App = () => {
 
   return (
     <main className="App">
-      {console.log(error)}
       <header>
         <h1>Burrito Builder</h1>
         <OrderForm setOrders={setOrders} orders={orders} setError={setError}/>
-        { error && <span>{error}</span>}
+        { error && <span className='error'>{error}</span>}
       </header>
       <Orders setOrders={setOrders} orders={orders} setError={setError}/>
     </main>

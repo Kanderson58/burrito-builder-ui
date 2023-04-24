@@ -26,7 +26,6 @@ export const postOrders = (order) => {
 }
 
 export const deleteFetch = (orderID) => {
-  console.log(orderID)
   return fetch(`http://localhost:3001/api/v1/orders/${orderID}`, {
     method: "DELETE",
     headers: {
