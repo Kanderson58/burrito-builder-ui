@@ -1,11 +1,10 @@
 export const getOrders = () => {
   return fetch('http://localhost:3001/api/v1/orders')
     .then(response => {
-      if(response.ok) {
-        console.log('successful get', response);
-        return response.json();
+      if(!response.ok) {
+        throw new Error(response.statusText);
       } else {
-        console.log('bad get', response);
+        return response.json();
       }
     });
 }
@@ -19,7 +18,7 @@ export const postOrders = (order) => {
     body: JSON.stringify(order)
   }).then(response => {
     if(!response.ok) {
-      throw new Error(response.statusText)
+      throw new Error(response.statusText);
     } else {
       return order
     }

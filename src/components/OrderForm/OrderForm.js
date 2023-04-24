@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { postOrders } from '../../apiCalls';
 
-const OrderForm = ({setOrders, orders}) => {
+const OrderForm = ({setOrders, orders, setError}) => {
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState([]);
-  const [error, setError] = useState('')
 
   const handleSubmit = e => {
     const newOrder = {'name': name, 'ingredients': ingredients}
@@ -55,7 +54,6 @@ const OrderForm = ({setOrders, orders}) => {
       />
 
       { ingredientButtons }
-      { error && <span>{error}</span>}
 
       <p>Order: { ingredients.join(', ') || 'Nothing selected' }</p>
 
