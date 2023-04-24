@@ -22,21 +22,21 @@ export const postOrders = (order) => {
     } else {
       return response.json()
     }
-  })
+  });
 }
 
-// export const deleteOrder = (orderID) => {
-//   return fetch('http://localhost:3001/api/v1/orders', {
-//     method: "DELETE",
-//     headers: {
-//       "Content-type": "application/json"
-//     },
-//     body: JSON.stringify(order)
-//   }).then(response => {
-//     if(!response.ok) {
-//       throw new Error(response.statusText);
-//     } else {
-//       return order
-//     }
-//   })
-// }
+export const deleteFetch = (orderID) => {
+  console.log(orderID)
+  return fetch(`http://localhost:3001/api/v1/orders/${orderID}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json"
+    }
+  }).then(response => {
+    if(!response.ok) {
+      throw new Error(response.statusText);
+    } else {
+      return response
+    }
+  });
+}

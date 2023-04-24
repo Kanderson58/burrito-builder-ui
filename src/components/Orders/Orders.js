@@ -1,10 +1,15 @@
 import React from 'react';
 import './Orders.css';
+import { deleteFetch } from '../../apiCalls';
 
-const Orders = ({orders}) => {
+const Orders = ({setOrders, orders, setError}) => {
 
   const deleteOrder = (e) => {
-    console.log(e.target.parentNode.id)
+    const filteredOrders = orders.filter(order => order.id !== parseInt(e.target.parentNode.id));
+
+    deleteFetch(e.target.parentNode.id)
+      .then(response => response.ok ? setOrders(filteredOrders) : null)
+      .catch(error => setError(`Couldn't delete the order: ${error}`));
   }
 
   const orderEls = orders.map(order => {
