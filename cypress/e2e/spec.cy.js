@@ -4,9 +4,6 @@ describe('Burrito Ordering System', () => {
       {'orders': [
         { 'name': 'Example GET Order 1',
           'ingredients': ['GET ingredient 1', 'GET ingredient 2', 'GET ingredient 3']
-        },
-        { 'name': 'Example GET Order 2',
-          'ingredients': ['GET ingredient 1', 'GET ingredient 2', 'GET ingredient 3']
         }
       ]}
     );
@@ -24,7 +21,13 @@ describe('Burrito Ordering System', () => {
     cy.get('h1').contains('Burrito Builder')
       .get('form').should('exist')
       .get('input').should('exist')
-      .get('button').should('have.length', '13')
+      .get('button').should('have.length', '13');
+
+    cy.get('.order').should('have.length', '1')
+      .get('.order > :nth-child(1)').contains('Example GET Order 1')
+      .get('.ingredient-list > :nth-child(1)').contains('GET ingredient 1')
+      .get('.ingredient-list > :nth-child(2)').contains('GET ingredient 2')
+      .get('.ingredient-list > :nth-child(3)').contains('GET ingredient 3');
   });
 
   it('should allow a user to submit an order that has  and show their order on submission', () => {
