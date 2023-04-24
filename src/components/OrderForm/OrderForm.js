@@ -1,17 +1,19 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
+import { postOrders } from '../../apiCalls';
 
 const OrderForm = ({setOrders, orders}) => {
   const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState([]);
 
   const handleSubmit = e => {
+    const newOrder = {'name': name, 'ingredients': ingredients}
     e.preventDefault();
     clearInputs();
     if(!name || !ingredients.length) {
       alert('Please fill out your name and at least one ingredient!')
     } else {
-      console.log('all gucci')
-      setOrders([...orders, {'name': name, 'ingredients': ingredients}])
+      postOrders(newOrder)
+      setOrders([...orders, newOrder])
     }
   }
 

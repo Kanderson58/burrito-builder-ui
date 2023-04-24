@@ -11,5 +11,11 @@ export const postOrders = (order) => {
       "Content-type": "application/json"
     },
     body: JSON.stringify(order)
+  }).then(response => {
+    if(!response.ok) {
+      console.log('uh oh')
+    } else {
+      console.log(response)
+    }
   })
 }
