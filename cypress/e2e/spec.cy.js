@@ -79,8 +79,9 @@ describe('Burrito Ordering System', () => {
   });
 
   it('should allow user to delete an order', () => {
+    // Delete button testing:  Each order should have a delete button.  User should be able to click the delete button and remove that order from the list of orders.
     cy.get('.order').should('have.length', '1')
-      .get('.delete').click()
+      .get('.delete').contains('Delete Order').click()
       .get('.order').should('not.exist')
       .get('section > p').contains('No orders yet!');
   })
