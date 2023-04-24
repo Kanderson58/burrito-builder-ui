@@ -6,7 +6,7 @@ const OrderForm = ({setOrders, orders, setError}) => {
   const [ingredients, setIngredients] = useState([]);
 
   const handleSubmit = e => {
-    const newOrder = {'name': name, 'ingredients': ingredients}
+    const newOrder = {'id': orders.length + 1, 'name': name, 'ingredients': ingredients}
     e.preventDefault();
     clearInputs();
     if(!name || !ingredients.length) {
