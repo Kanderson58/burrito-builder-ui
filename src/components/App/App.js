@@ -9,9 +9,7 @@ const App = (props) => {
 
   useEffect(() => {
     getOrders()
-      .then(data => {
-        console.log(data.orders)
-        setOrders(data.orders)})
+      .then(data => setOrders(data.orders))
       .catch(err => console.error('Error fetching:', err));
   }, []);
 
