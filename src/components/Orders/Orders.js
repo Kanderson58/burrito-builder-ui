@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { getOrders } from '../../apiCalls';
 import './Orders.css';
 
 const Orders = ({orders}) => {

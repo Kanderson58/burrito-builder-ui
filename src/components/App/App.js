@@ -15,7 +15,6 @@ const App = () => {
 
   return (
     <main className="App">
-      {console.log(orders)}
       <header>
         <h1>Burrito Builder</h1>
         <OrderForm setOrders={setOrders} orders={orders}/>

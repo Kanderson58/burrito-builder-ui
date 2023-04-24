@@ -1,7 +1,13 @@
-export const getOrders = async() => {
-  const fetchOrders = fetch('http://localhost:3001/api/v1/orders')
-  const response = await fetchOrders
-  return response.json();
+export const getOrders =() => {
+  return fetch('http://localhost:3001/api/v1/orders')
+    .then(response => {
+      if(response.ok) {
+        console.log('successful get', response);
+        return response.json();
+      } else {
+        console.log('bad get', response);
+      }
+    });
 }
 
 export const postOrders = (order) => {
@@ -12,10 +18,10 @@ export const postOrders = (order) => {
     },
     body: JSON.stringify(order)
   }).then(response => {
-    if(!response.ok) {
-      console.log('uh oh')
+    if(response.ok) {
+      console.log('successful post', response);
     } else {
-      console.log(response)
+      console.log('bad post', response);
     }
   })
 }
