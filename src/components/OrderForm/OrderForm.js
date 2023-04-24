@@ -14,7 +14,8 @@ const OrderForm = ({setOrders, orders, setError}) => {
     } else {
       postOrders(newOrder)
         .then(response => setOrders([...orders, response]))
-        .catch(error => setError(error))
+        .catch(error => {
+          setError(`Problem with submitting order: ${error}`)})
     }
   }
 
