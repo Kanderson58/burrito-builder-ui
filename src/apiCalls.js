@@ -18,10 +18,10 @@ export const postOrders = (order) => {
     },
     body: JSON.stringify(order)
   }).then(response => {
-    if(response.ok) {
-      console.log('successful post', response);
+    if(!response.ok) {
+      throw new Error(response.statusText)
     } else {
-      console.log('bad post', response);
+      return order
     }
   })
 }

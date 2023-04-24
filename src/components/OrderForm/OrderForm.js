@@ -14,7 +14,8 @@ const OrderForm = ({setOrders, orders}) => {
       setError('Please fill out both your name and at least one ingredient!')
     } else {
       postOrders(newOrder)
-      setOrders([...orders, newOrder])
+        .then(response => setOrders([...orders, response]))
+        .catch(error => setError(error))
     }
   }
 
